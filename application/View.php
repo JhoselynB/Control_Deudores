@@ -1,99 +1,112 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 class View{
     private $_controlador;
+    
     public function __construct(Request $peticion) {
         $this->_controlador = $peticion->getControlador();
     }
-    public function renderizar($vista, $item = false)
-            
-                {
-       $menu = array(
-            //Menu Inicio
+    
+    public function renderizar($vista, $item = false){
+        //Creamos un array para el menu del template default con un array asociativo
+        $menu = array(
+            //Inicio [0]
             array(
                 'id' => 'inicio',
                 'titulo' => 'Inicio',
                 'enlace' => BASE_URL
             ),
-            
-            //Menu Ventas
+            //Ventas [1]
             array(
                 'id' => 'ventas',
                 'titulo' => 'Ventas',
                 'enlace' => BASE_URL.'ventas'
             ),
-            //Menu Deudores
+            //Deudores [2]
             array(
                 'id' => 'deudores',
                 'titulo' => 'Deudores',
                 'enlace' => BASE_URL.'deudores'
             ),
-           //Menu Matenimiento
+            //Mantenimiento [3]
             array(
                 'id' => 'mantenimiento',
                 'titulo' => 'Mantenimiento',
                 'enlace' => BASE_URL.'mantenimiento'
             ),
-            // Menu Acerca de 
+            //Acerca de [4]
             array(
                 'id' => 'acerca',
                 'titulo' => 'Acerca de',
                 'enlace' => BASE_URL.'acerca'
             ),
-           //Menu Registro Mantenimiento
+            //Submenus Mantenimiento
+            //Registro de productos [5]
             array(
-                'id' => 'registro_producto',
-                'titulo' => 'Registro',
-                'enlace' => BASE_URL.'registro_producto'
+                'id' => 'registro',
+                'titulo' => 'Registro de Productos',
+                'enlace' => BASE_URL.'registro_productos'
             ),
-           //Reportes diarios
+            //Reporte deudores [6]
             array(
-                'id' => 'reportes_semanales',
-                'titulo' => 'Reportes Semanales',
-                'enlace' => BASE_URL.'reportes_semanales'
+                'id' => 'reportedeudores',
+                'titulo' => 'Deudores',
+                'enlace' => BASE_URL.'reporte_deudores'
             ),
-           array(
-                'id' => 'reportes_mensuales',
-                'titulo' => 'Reportes Mensuales',
-                'enlace' => BASE_URL.'reportes_mensuales'
+            //Reporte ventas semanal [7]
+            array(
+                'id' => 'semanal',
+                'titulo' => 'Semanal',
+                'enlace' => BASE_URL.'rep_vent_semanal'
             ),
-              array(
-                'id' => 'reportes_por_fecha',
-                'titulo' => 'Reportes por Fecha',
-                'enlace' => BASE_URL.'reportes_por_fecha'
+            //Reporte ventas mensual [8]
+            array(
+                'id' => 'mensual',
+                'titulo' => 'Mensual',
+                'enlace' => BASE_URL.'rep_vent_mensual'
             ),
-               array(
-                'id' => 'reportes_deudores',
-                'titulo' => 'Reportes Deudores',
-                'enlace' => BASE_URL.'reportes_deudores'
+            //Reporte ventas por fecha [9]
+            array(
+                'id' => 'fecha',
+                'titulo' => 'Por Fecha',
+                'enlace' => BASE_URL.'rep_vent_fecha'
             ),
         );
         
-        $_layoutParams= array(
-           
+        //creamos un array para definir la ruta del archivo css, js, img
+        //para las vistas en general
+        $_layoutParams = array(
+            //css - js - img para el template por default de la pagina
             'ruta_css' => BASE_URL.'views/layout/'.DEFAULT_LAYOUT.'/css/',
-            'ruta_img' => BASE_URL.'views/layout/'.DEFAULT_LAYOUT.'/img/',
             'ruta_js' => BASE_URL.'views/layout/'.DEFAULT_LAYOUT.'/js/',
-             'menu' => $menu 
+            'ruta_img' => BASE_URL.'views/layout/'.DEFAULT_LAYOUT.'/img/',
+            
+            //css - js - img para las vistas
+            'ruta_css_vista' => BASE_URL.'views/'.$this->_controlador.'/css/',
+            'ruta_js_vista' => BASE_URL.'views/'.$this->_controlador.'/js/',
+            'ruta_img_vista' => BASE_URL.'views/'.$this->_controlador.'/img/',
+            
+            //rutas public
+            'ruta_img_pub' => BASE_URL.'public/img/',
+            'ruta_css_pub' => BASE_URL.'public/css/',
+            'ruta_js_pub' => BASE_URL.'public/js/',
+            
+            //otras rutas
+            'ruta_index' => ROOT.'views/'.$this->_controlador,
+            'menu' => $menu
         );
         
-        $rutaView =ROOT . 'views'. DS . $this->_controlador . DS . $vista . '.phtml'  ;
-     
+        //ruta del archivo phtml de la vista que usaremos
+        $rutaView = ROOT.'views'.DS.$this->_controlador.DS.$vista.'.phtml';
+        
+        //verificamos que el archivo este disponible y accesible
         if(is_readable($rutaView)){
-          include_once ROOT.'views'.DS.'layout'.DS.DEFAULT_LAYOUT.DS.'header.php';
-          include_once ROOT.'views'.DS.'layout'.DS.DEFAULT_LAYOUT.DS .'footer.php' ; 
-          include_once $rutaView;
-          
-      }
-      else{
-          throw new Exception('Error de vista');   
-      }
-      
-          }
+            //Incluimos el header y footer del template
+            include_once ROOT.'views'.DS.'layout'.DS.DEFAULT_LAYOUT.DS.'header.php';
+            include_once ROOT.'views'.DS.'layout'.DS.DEFAULT_LAYOUT.DS.'footer.php';
+        }else{
+            //Si no encuentra la vista se emite un mensaje de error
+            include  ROOT.'public/notView.php';
+        }
+    }
 }

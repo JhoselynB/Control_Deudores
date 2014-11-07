@@ -1,0 +1,135 @@
+.regcorrecto, .regerror{
+    position: fixed;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    background-color: #16ad4d;
+    color: white;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 0px;
+}
+
+.regerror{
+    background-color: #f64141;
+}
+
+.regproducto{
+    width: 500px;
+    height: auto;
+}
+
+table {
+    font: 85% "Lucida Grande", "Lucida Sans Unicode", "Trebuchet MS", sans-serif;
+    padding: 0; 
+    margin: 0; 
+    border-collapse: collapse; 
+    color: #333; 
+    background: #F3F5F7;
+    border: 1px solid #3A4856;
+    display: block;
+}
+
+thead{
+    display: inline-block;
+    width: 100%;
+    height: auto;
+}
+
+tbody{
+    height: 120px;
+    display: inline-block;
+    width: 100%;
+    overflow: auto;
+}
+
+th{
+    background: #3A4856; 
+    padding: 15px 10px; 
+    color: white; 
+    font-size: 14px;
+    text-align: center;
+    font-family: verdana;
+}
+
+td{
+    padding: 10px; 
+    background: url("td_back.gif") repeat-x; 
+    text-align: justify;
+}
+
+tr:hover, tr.codigo{
+    background: #EAECEE; 
+    color: #111;
+}
+
+td.left{
+    width: auto;
+}
+
+input[type=text], select{
+    width: 200px;
+    height: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border: 1px solid #737373;
+    border-radius: 4px;
+}
+
+.buttton{
+    width: 210px;
+    height: 30px;
+    float: right;
+    border: 1px solid #737373;
+    cursor: pointer;
+    background: transparent;
+    transition: all .2s;
+}
+
+.buttton:hover{
+    background: #737373;
+    color: white;
+}
+
+.buttton:active{
+    border: 1px solid #16ad4d;
+    background: #16ad4d;
+    color: white;
+}
+
+select, select:active, select:focus{
+    width: 212px;
+    outline: 0px;
+}
+
+.msm{
+    font-size: 10px;
+}
+
+td.prod{
+    border-bottom: 1px solid #737373;
+}
+
+.code{
+    background: transparent;
+    border: 0px;
+}
+
+::-webkit-scrollbar {
+    margin-right: 5px;
+    background-color: transparent;
+    width: 6px;
+}
+::-webkit-scrollbar-thumb{
+    background: #C7573A;
+    -webit-transition: all .3s ease-out;
+    transition: all .3s ease-out;
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:window-inactive {
+    background: #bbb;
+}
+::-webkit-scrollbar-thumb:hover { 
+    background: #b7472A; 
+}

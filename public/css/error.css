@@ -1,0 +1,77 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    background: #f2f2f2;
+    margin: 0px;
+}
+
+.container{
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    top: 50%;
+    left: 50%;
+    margin-top: -310px;
+    margin-left: -250px;
+}
+
+img{
+    -webkit-filter: drop-shadow(0px 0px 2px #000); 
+    filter: drop-shadow(0px 0px 3px #222);
+    cursor: default;
+}
+
+.texto {
+    text-align: center;
+    background: #000000;
+    font-size: 100px;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0px 3px 3px rgba(255,255,255,0.5),0px -1px 1px rgba(0,0,0,.3);
+    cursor: default;
+}
+
+.contenido{
+    font-size: 50px;
+}
+
+a, a:hover, a:active, a:focus{
+    text-decoration: none;
+    color: black;
+}
+
+.retornar{
+    width: 500px;
+    height: 20px;
+    background: #147ca7;
+    border: 1px solid #147ca7;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 6px;
+    font-family: verdana;
+}
+.retornar, .retornar:hover, .retornar:active{
+    -webkit-transition: all .1s;
+    -moz-transition: all .1s;
+    -o-transition: all .1s;
+    -ms-transition: all .1s;
+    transition: all .1s;
+    color: white;
+}
+
+.retornar:hover{
+    border: 1px solid #145190;
+    background: #145190;
+}
+
+.retornar:active{
+    background: #198641;
+    border: 1px solid #198641;
+}

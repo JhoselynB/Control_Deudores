@@ -44,6 +44,7 @@
                             ?>
 
                             <li id="<?php echo $_item_style; ?>"><a href="<?php echo $_layoutParams['menu'][$i]['enlace'] ?>"><span><?php echo $_layoutParams['menu'][$i]['titulo']; ?></span></a></li>
+                            <li id="<?php echo $_item_style; ?>"><a href="<?php echo $_layoutParams['menu'][$i]['enlace'] ?>"><span><?php echo $_layoutParams['menu'][$i]['titulo']; ?></span></a></li>
 
                             <?php endfor; ?>
                             <?php endif; ?>
@@ -105,12 +106,6 @@
                 </div>
 
                 <div id="contenido">
-                    <?php $peticion= new Request;
-                    $controller = $peticion->getControlador();
-                    if ($controller=='index'){
-                        include_once ROOT.'controllers'.DS.$controller.'.phtml';
-                    }
-                    ?>
                 <!-- right panel div starts here-->
         
         

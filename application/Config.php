@@ -1,15 +1,14 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
+//Valores para la ruta de los archivos a usar
+define('BASE_URL', 'http://localhost/Control_Deudores/');
 define('DEFAULT_CONTROLLER', 'index');
 define('DEFAULT_LAYOUT', 'main');
-define('BASE_URL', 'http://localhost/Control_Deudores/');
 
-define('APP_NAME', 'Mi Aplicacion');
-define('APP_SLOGAN', 'Mi primer aplicacion con MVC');
-define('APP_COMPANY', 'www.soneJ.com');
+//Valores para trabajar con la base de datos
+define('DB_HOST','localhost');
+define('DB_USER','root');
+define('DB_PASS','');
+define('DB_NAME','tienda_ropa');
+define('DB_CHAR','utf8');

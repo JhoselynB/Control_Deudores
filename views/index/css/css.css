@@ -1,0 +1,72 @@
+.recordatorio{
+    margin-bottom: 10px;
+    margin-left: 10px;
+    width: 206.3px;
+    height: 220px;
+    position: relative;
+    float: left;
+    display: block;
+    padding: 10px;
+    color: white;
+    font-family: note;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    -moz-box-shadow: 1px 1px 3px rgba(0,0,0,.6);
+    -ms-box-shadow: 1px 1px 3px rgba(0,0,0,.6);
+    -o-box-shadow: 1px 1px 3px rgba(0,0,0,.6);
+    -webkit-box-shadow: 1px 1px 3px rgba(0,0,0,.6);
+    box-shadow: 1px 1px 3px rgba(0,0,0,.6);
+}
+
+.recordatorio:before {
+    content:'';
+    position:absolute;
+    border:1px dashed white;
+    top:4px;
+    bottom:4px;
+    left:4px;
+    right:4px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.pagos{
+    top: 0px;
+    padding-left: 5px;
+    font-size: 20px;
+    width: calc(100% - 5px);
+    height: 30px;
+    line-height: 35px;
+    position: relative;
+    font-family: calendar_num;
+    font-weight: bold;
+    /*border: 1px solid #009999;*/
+    border-radius: 4px;
+    margin-bottom: 10px;
+    cursor: default;
+}
+
+.nopay{
+    width: calc(100% - 41px);
+    padding: 20px;
+    height: 300px;
+    position: relative;
+    text-align: center;
+    border-top: 5px solid #009999;
+    border-bottom: 5px solid #009999;
+    background-color: rgba(0,0,0,.1);
+    border-radius: 4px;
+}
+
+.imgnopay{
+    width: 300px;
+    height: 300px;
+    position: relative;
+}
+
+.container_recor{
+    border-top: 5px solid #009999;
+    border-bottom: 5px solid #009999;
+    background-color: rgba(0,0,0,.1);
+    border-radius: 4px;
+}

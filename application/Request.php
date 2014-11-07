@@ -1,11 +1,10 @@
 <?php
 
-//Recibe y procesa la peticion de a que controlador
 class Request {
 
     private $_controlador;
     private $_metodos;
-    private $_argumentos;// Va a servir para editar y eliminar
+    private $_argumentos;
 
     public function __construct() {
         if (isset($_GET['url'])) {
@@ -13,32 +12,33 @@ class Request {
             $url = explode('/', $url);
             $url = array_filter($url);
             
- 
-       $this->_controlador = strtolower(array_shift($url));//strtolower para poner todo en minuscula
-       $this->_metodos =  strtolower(array_shift($url)) ;
-       $this->_argumentos = $url;
+            $this->_controlador = strtolower(array_shift($url));
+            $this->_metodos = strtolower(array_shift($url));
+            $this->_argumentos = $url;
+        }
+
+        if (!$this->_controlador) {
+            $this->_controlador = DEFAULT_CONTROLLER;
+        }
+
+        if (!$this->_metodos) {
+            $this->_metodos = 'index';
+        }
+
+        if (!isset($this->_argumentos)) {
+            $this->_argumentos = array();
+        }
     }
-       if (!$this->_controlador){
-           $this->_controlador= DEFAULT_CONTROLLER;
-                              }
-       if (!$this->_metodos){
-           $this->_metodos= 'index';
-       }           
-       if (!isset($this->_argumentos)){
-           $this->_argumentos= array() ;    
-       }
-       
-       } 
-       public function getControlador() {
-           return $this->_controlador ;
-           
-       }
-       public function getMetodos() {
-           return $this->_metodos;
-           
-       }
-       public function getArgumentos() {
-           return $this->_argumentos;
-           }
-           
-       }
+
+    public function getControlador() {
+        return $this->_controlador;
+    }
+    
+    public function getMetodo() {
+        return $this->_metodos;
+    }
+    public function getArgumentos() {
+        return $this->_argumentos;
+    }
+
+}

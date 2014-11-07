@@ -16,12 +16,23 @@ a, a:hover, a:active, a:focus{
     color: black;
 }
 
+ul li{
+    z-index: 9999;
+}
+
+ul li ul li a, ul li ul li a:hover,
+ul li ul li a:focus, ul li ul li a:active
+{
+    color: white;
+}
 .img_ventas, .img_deudores, .img_mantenimiento, .img_acerca{
     position: absolute; 
     margin-top: -7px; 
     margin-left: -40px;
 }
-
+div.recordatorios a{
+    color: white;
+}
 .img_deudores{
     margin-left: -44px;
 }
@@ -38,10 +49,6 @@ img.recor{
     position: absolute; 
     margin-top: 5px; 
     margin-left: -30px;
-}
-
-a.button{
-    width: 139.4px;
 }
 
 #dvmaincontainer{
@@ -89,6 +96,14 @@ li{
     text-align: center;
 }
 
+li.segundoNi{
+    background-color: #ff6d4f;
+}
+
+.registro{
+    border-bottom: 1px solid #e3e4e4;
+}
+
 ul {
     display: inline;
     padding: 15px 4px 17px 0;
@@ -109,10 +124,15 @@ ul li {
     -o-transition: all 0.2s;
     transition: all 0.2s;
 }
-ul li:hover {
+ul li:hover, li#current{
     background: #54bca6;
     color: #fff;
 }
+ul li#current a div.hover, ul li:hover a div.hover {color: white;}
+li#current div.home{
+    background: url(../img/menu/home-hover.png) no-repeat;
+}
+
 ul li ul, ul li ul li ul {
     padding: 0;
     position: absolute;
@@ -218,8 +238,6 @@ div.lateralIzq{
 div.lateralDer{
     float: right;
     width: 710px;
-    height: 500px;
-    border: 1px dashed black;
 }
 
 /*CALENDARIO*/
@@ -231,6 +249,11 @@ div.lateralDer{
 @font-face{
     font-family: calendar_num;
     src: url(../font/num_cal.ttf);
+}
+
+@font-face{
+    font-family: note;
+    src: url(../font/note.otf);
 }
 
 div.cuerpo_calendario{
@@ -284,3 +307,34 @@ footer {
     top: 5px;
     text-align: right; 
 }
+
+/*Recordatorio*/
+.add_recordatorio{
+    display: none;
+    width: 710px;
+}
+
+.record{
+    background: red;
+}
+
+input[type=color]{
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+input[type=text].titulo{
+    width: 213.3px;
+    outline: 0px;
+    height: 35px;
+    border: none;
+    background: rgba(0,0,0,.7);
+    color: white;
+    padding: 5px;
+    text-align: center;
+    margin-left: -2px;
+    margin-top: -2px;
+}
+
+input:active, input:focus, input{outline: 0px;}

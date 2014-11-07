@@ -1,2 +1,49 @@
+<!--Stylesheet de index.phtml-->
+<link type="text/css" rel="stylesheet" href="<?php echo $_layoutParams['ruta_css_vista']; ?>css.css"/>
+<script src="<?php echo $_layoutParams['ruta_js_pub'] ?>query.js"></script>
 
-<h2> Index </h2>
+<div class="laterlDer">
+    <div class="pagos">Pagos a realizarse hoy <?php
+        $dia = date("d");
+        $año = date("y");
+        echo $dia . " de " . mes() . " del 20" . $año;
+        ?>
+    </div>
+
+    <!-- Obteniendo los recordatorios registrados -->
+    <?php if (isset($this->record) && count($this->record)): ?>
+        <?php for ($i = 0; $i < count($this->record); $i++): ?>
+            <?php
+            $celular = $this->record[$i]['celular'];
+            $telefono = $this->record[$i]['telefono'];
+            ?>
+            <div id="recordatorio" class="recordatorio" style="background-color: #369C69;">
+                <span class="title">DNI: <?php echo $this->record[$i]['dni']; ?></span><br/>
+                <span class="title">Nombres: <?php echo $this->record[$i]['nombre']; ?></span><br/>
+                <span class="title">Apellidos: <?php echo $this->record[$i]['apellido']; ?></span><br/><br/>
+                <span class="title">Direcci&oacute;n<br/> <?php echo $this->record[$i]['direccion']; ?></span><br/><br/>
+                <?php if ($telefono == NULL && $celular == NULL): ?>
+                    <br/><br/>
+                <?php else: ?>
+                    <?php if (!($telefono == NULL) && !($celular == NULL)): ?>
+                        <span class="title">Celular: <?php echo $celular; ?></span><br/>
+                        <span class="title">Tel&eacute;fono: <?php echo $telefono; ?></span><br/><br/>
+                    <?php else: ?>
+                        <?php if (!($telefono == '') || !($celular == '')): ?>
+                            <?php if ($telefono == ''): ?>
+                                <span class="title">Celular: <?php echo $celular; ?></span><br/><br/>
+                            <?php else: ?>
+                                <span class="title">Tel&eacute;fono: <?php echo $telefono; ?></span><br/><br/>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                <?php endif; ?>
+                <span class="title">Deuda Total: <?php echo 'S/. ' . number_format((float) $this->record[$i]['deuda'], 2, '.', ''); ?></span><br/>
+            </div>
+        <?php endfor; ?>
+    <?php else: ?>
+    <div class="nopay">
+        <img class="imgnopay" src="<?php echo $_layoutParams['ruta_img_vista'];?>smile1.png"/>
+    </div>
+    <?php endif; ?>
+</div>

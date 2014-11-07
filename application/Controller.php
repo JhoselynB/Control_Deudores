@@ -1,18 +1,70 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-abstract class Controller {
-    protected  $_view;
-      abstract public function index();//De esta manera nos aseguramos de que siempre aya un meroso index en todos los contrladores
+abstract class Controller{
+    protected $_view;
+    
     public function __construct() {
-        $this->_view = new View(new Request)  ;
+        $this->_view = new View(new Request);
     }
-
-  
-       
+    
+    abstract public function index();
+    
+    //creamos un metodo protegido que nos proporcione una instancia del modelo
+    protected function loalModel($modelo){
+        $modelo = $modelo.'Model';
+        $rutaModelo = ROOT.'models'.DS.$modelo.'.php';
+        
+        //Verificamos si el archivo es accesible
+        if(is_readable($rutaModelo)){
+            require_once $rutaModelo; //Incluimos el archivo desde la rutaModelo
+            $modelo = new $modelo;    //Instanciamos el modelo
+            return $modelo;           //Nos devuelve la instancia del modelo
+        }else{
+            include ROOT.'public/notModel.php';  //Error si no se obtiene ningun modelo
+        }
+    }
+    
+    protected function getLibrary($libreria)
+    {
+        $rutaLibreria = ROOT . 'libs' . DS . $libreria . '.php';
+        
+        if(is_readable($rutaLibreria)){
+            require_once $rutaLibreria;
+        }
+        else{
+            throw new Exception('Error de libreria');
+        }
+    }
+    
+    protected function getTexto($clave)
+    {
+        if(isset($_POST[$clave]) && !empty($_POST[$clave])){
+            $_POST[$clave] = htmlspecialchars($_POST[$clave], ENT_QUOTES);
+            return $_POST[$clave];
+        }
+        
+        return '';
+    }
+    
+    protected function getInt($clave)
+    {
+        if(isset($_POST[$clave]) && !empty($_POST[$clave])){
+            $_POST[$clave] = filter_input(INPUT_POST, $clave, FILTER_VALIDATE_INT);
+            return $_POST[$clave];
+        }
+        
+        return 0;
+    }
+    
+    protected function redireccionar($ruta = false)
+    {
+        if($ruta){
+            header('location:' . BASE_URL . $ruta);
+            exit;
+        }
+        else{
+            header('location:' . BASE_URL);
+            exit;
+        }
+    }
 }

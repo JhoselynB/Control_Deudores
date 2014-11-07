@@ -1,0 +1,161 @@
+<link href="<?php echo $_layoutParams['ruta_css_vista']; ?>estilos.css" type="text/css" rel="stylesheet"/>
+<script src="<?php echo $_layoutParams['ruta_js_pub'] ?>query.js"></script>
+<script language="javascript">
+    function recargar() {
+        $.post("http://localhost/mvc/registro_productos/index", function (data) {
+            $("#recargar").html(data);
+        });
+    }
+</script>
+
+<!--Incluimos el archivo generacodigos.php de la carpeta public-->
+<?php
+require_once ROOT . 'public/generacodigos.php';
+$codigo = new generadorcodigos(); //Instanciamos la clase generarcodigos();
+?>
+
+<!-- div contenedor -->
+<div class="lateralDer">
+    <table style="width: 100%; border: 0px;">
+        <thead>
+            <tr>
+                <td colspan="4">
+                    <form method="post" action="">
+                        <label for="buscar">Buscar Producto</label>
+                        <input type="text" name="buscar" id="buscar" required=""/>
+                        <input type="submit" name="search" value="Buscar Producto"/>
+                    </form>
+                </td>
+                <?php if (isset($this->producto) && count($this->producto)): ?>
+                    <td colspan="4" style="text-align: right;">
+                        <?php echo 'Cantidad de Registros: ' . $this->producto[0]['cantidad']; ?>
+                    </td>
+                <?php endif; ?>
+            </tr>
+            <tr>
+                <th style="text-align: left; width: 79px;">C&Oacute;DIGO</th>
+                <th style="text-align: left; width: 156px;">PRODUCTO</th>
+                <th style="text-align: left; width: 88.8px;">MATERIAL</th>
+                <th style="width: 60px; text-align: center;">TALLA</th>
+                <th style="text-align: left; width: 54px;">COLOR</th>
+                <th style="text-align: left; width: 110px;">CATEGOR&Iacute;A</th>
+                <th><a href="" onclick="javascript:recargar();"><img src="<?php echo $_layoutParams['ruta_img_vista'] ?>reload.png" width="25" height="25"/></a></th>
+            </tr>
+        </thead>
+        <tbody id="bodyt">
+            <?php
+            if (isset($_POST['search'])) {
+                echo '<script>document.getElementById("bodyt").style.height= "auto"</script>';
+            }
+            ?>
+
+            <?php if (isset($this->producto) && count($this->producto)): ?>
+                <?php for ($i = 0; $i < count($this->producto); $i++): ?>
+                    <tr>
+                        <td class="prod" style="width: 77px;"><?php echo $this->producto[$i]['cod_busqueda']; ?></td>
+                        <td class="prod" style="width: 155px;"><?php echo $this->producto[$i]['producto']; ?></td>
+                        <td class="prod" style="width: 88px;"><?php echo $this->producto[$i]['material']; ?></td>
+                        <td class="prod" style="width: 60px; text-align: center">
+                            <?php
+                            if ($this->producto[$i]['talla'] == NULL) {
+                                echo '---------';
+                            } else {
+                                echo $this->producto[$i]['talla'];
+                            }
+                            ?>
+                        </td>
+                        <td class="prod" style="width: 55px;"><?php echo $this->producto[$i]['color']; ?></td>
+                        <td class="prod" style="width: 75px;"><?php echo $this->producto[$i]['clasificacion']; ?></td>
+                        <td class="prod" style="width: auto; text-align: right;">
+                            <a href="">
+                                <img width="16" height="16" src="<?php echo $_layoutParams['ruta_img_vista']; ?>editar.png" title="Editar <?php echo $this->producto[$i]['producto']; ?>">
+                            </a>
+                        </td>
+                        <td class="prod" style="width: auto; text-align: right;">
+                            <a href="<?php echo BASE_URL . 'registro_productos/eliminar/' . $this->producto[$i]['cod_busqueda'] ?>">
+                                <img src="<?php echo $_layoutParams['ruta_img_vista']; ?>delete.png" title="Eliminar <?php echo $this->producto[$i]['producto']; ?>">
+                            </a>
+                        </td>
+                    </tr>
+                <?php endfor; ?>
+            <?php endif; ?>
+        </tbody>
+    </table>
+    <br/>
+
+    <form method="post" action="" class="regproducto">
+        <!--<div class="cabeera_regp">Registro de productos</div>-->
+        <input type="hidden" name="guardar" value="1" />
+        <table style="width: 322px; height: 364px;">
+            <thead>
+                <tr>
+                    <th style="width: 322px;" colspan="2">Registro de Productos</th>
+                </tr>
+            </thead>
+            <tbody style="width: 322px; overflow: hidden; height: 364px;">
+                <tr class="codigo">
+                    <td class="left">
+                        <label for="codigo">C&Oacute;DIGO</label>
+                    </td>
+                    <td><input class="code" type="text" name="codigo" id="codigo" maxlength="9" readonly="" required="" value="<?php $codigo->codigos(); ?>"><br/>
+                        <span class="msm">*Coloque el c&oacute;digo en el producto</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="left">
+                        <label for="producto">PRODUCTO</label>
+                    </td>
+                    <td>
+                        <input type="text" name="producto" id="producto" required="">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="left">
+                        <label for="material">MATERIAL</label>
+                    </td>
+                    <td>
+                        <input type="text" name="material" id="material" required="">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="left">
+                        <label for="talla">TALLA</label>
+                    </td>
+                    <td>
+                        <input type="text" name="talla" id="talla" onKeyUp="this.value = this.value.toUpperCase();">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="left">
+                        <label for="color">COLOR</label>
+                    </td>
+                    <td>
+                        <input type="text" name="color" id="color" required="" onKeyUp="this.value = this.value.toUpperCase();">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="left">
+                        <label for="id_clasificacion">CATEGOR&Iacute;A</label>
+                    </td>
+                    <td>
+                        <?php if (isset($this->clasificacion) && count($this->clasificacion)) : ?>
+                            <select name="id_clasificacion" id="id_clasificacion" required="">
+                                <option>--- Seleccione una categor&iacute;a ---</option>
+                                <?php for ($i = 0; $i < count($this->clasificacion); $i++): ?>
+                                    <option value="<?php echo $this->clasificacion[$i]['Id_clasificacion']; ?>"><?php echo $this->clasificacion[$i]['clasificacion']; ?></option>
+                                <?php endfor; ?>
+                                <option>--- Categor&iacute;as ---</option>
+                            </select>
+                        <?php endif; ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="Registrar Producto" class="buttton"/>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+
